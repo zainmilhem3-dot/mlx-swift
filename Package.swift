@@ -205,14 +205,3 @@ let package = Package(
     cxxLanguageStandard: .gnucxx17
 )
 
-// Playgrounds-safe: do NOT use PackageDescription.Context.environment.
-// Playgrounds omits SwiftPM's -context flag → fatal:
-//   Could not decode ContextModel parameter (mlx-swift#107).
-import Foundation
-let _mlxDocs = ProcessInfo.processInfo.environment["MLX_SWIFT_BUILD_DOC"] == "1"
-    || ProcessInfo.processInfo.environment["SPI_GENERATE_DOCS"] == "1"
-if _mlxDocs {
-    package.dependencies.append(
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0")
-    )
-}
